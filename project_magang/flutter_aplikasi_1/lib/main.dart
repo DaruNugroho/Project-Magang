@@ -45,6 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Nilai Bil : $bil',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
                 ),
+                Container(
+                  height: 15.0,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -52,6 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text('<<'),
                       onPressed: decrementBil,
                       color: Colors.green,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
                     ),
                     Container(
                       width: 10.0,
@@ -60,6 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text('>>'),
                       onPressed: incrementBil,
                       color: Colors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
                     )
                   ],
                 )
