@@ -51,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     RaisedButton(
                       child: Text('<<'),
                       onPressed: decrementBil,
+                      color: Colors.green,
                     ),
                     Container(
                       width: 10.0,
@@ -58,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     RaisedButton(
                       child: Text('>>'),
                       onPressed: incrementBil,
+                      color: Colors.red,
                     )
                   ],
                 )
