@@ -35,14 +35,32 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text('Halaman Beranda'),
         ),
         body: Center(
-          child: Text(
-            'Daru Nugroho',
-            textDirection: TextDirection.ltr,
-            style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.blueAccent),
-          ),
+          child: HelloButton(),
         ));
   }
+}
+
+class HelloButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      child: Text('Hello'),
+      onPressed: () {
+        action(context);
+      },
+    );
+  }
+}
+
+void action(BuildContext buildContext) {
+  var alertDialog = AlertDialog(
+    title: Text('Event Handling'),
+    content: Text('Selamat Ngoding flutter :)'),
+  );
+
+  showDialog(
+      context: buildContext,
+      builder: (BuildContext context) {
+        return alertDialog;
+      });
 }
