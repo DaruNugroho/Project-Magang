@@ -44,23 +44,30 @@ class HelloButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-      child: Text('Hello'),
+      child: Text('Klik Saya'),
       onPressed: () {
         action(context);
       },
     );
   }
-}
 
-void action(BuildContext buildContext) {
-  var alertDialog = AlertDialog(
-    title: Text('Event Handling'),
-    content: Text('Selamat Ngoding flutter :)'),
-  );
+  void action(BuildContext buildContext) {
+    var alertDialog = AlertDialog(
+      title: Text(
+        'Albert Einstein',
+        textAlign: TextAlign.center,
+      ),
+      content: Text(
+        'Cobalah untuk tidak menjadi seorang yang sukse, tapi jadilah seorang yang bernilai. ' +
+            'Selamat Ngoding flutter :)',
+        textAlign: TextAlign.justify,
+      ),
+    );
 
-  showDialog(
-      context: buildContext,
-      builder: (BuildContext context) {
-        return alertDialog;
-      });
+    showDialog(
+        context: buildContext,
+        builder: (BuildContext context) {
+          return alertDialog;
+        });
+  }
 }
