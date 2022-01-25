@@ -28,6 +28,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int bil = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,39 +37,98 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text('Halaman Beranda'),
         ),
         body: Center(
-          child: HelloButton(),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Nilai Bil : $bil',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RaisedButton(
+                      child: Text('<<'),
+                      onPressed: decrementBil,
+                    ),
+                    Container(
+                      width: 10.0,
+                    ),
+                    RaisedButton(
+                      child: Text('>>'),
+                      onPressed: incrementBil,
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
         ));
   }
-}
 
-class HelloButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return RaisedButton(
-      child: Text('Klik Saya'),
-      onPressed: () {
-        action(context);
-      },
-    );
+  void incrementBil() {
+    setState(() {
+      if (bil < 10) {
+        bil++;
+      } else {
+        var flag = true;
+        limit(context, flag);
+      }
+    });
   }
 
-  void action(BuildContext buildContext) {
-    var alertDialog = AlertDialog(
+  void decrementBil() {
+    setState(() {
+      if (bil > 0) {
+        bil--;
+      } else {
+        var flag = false;
+        limit(context, flag);
+      }
+    });
+  }
+
+  void limit(BuildContext context, bool flag) {
+    var alertDialogIncrement = AlertDialog(
       title: Text(
-        'Albert Einstein',
+        'Danger !',
+        style: TextStyle(
+          fontSize: 24.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.red,
+        ),
         textAlign: TextAlign.center,
       ),
       content: Text(
-        'Cobalah untuk tidak menjadi seorang yang sukse, tapi jadilah seorang yang bernilai. ' +
-            'Selamat Ngoding flutter :)',
-        textAlign: TextAlign.justify,
+        'Bahaya Melewati Batas Maksimum Jangan Diteruskan',
+        textAlign: TextAlign.center,
+      ),
+    );
+
+    var alertDialogDecrement = AlertDialog(
+      title: Text(
+        'Danger !',
+        style: TextStyle(
+          fontSize: 24.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.red,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      content: Text(
+        'Bahaya Melewati Batas Minimum Jangan Diteruskan',
+        textAlign: TextAlign.center,
       ),
     );
 
     showDialog(
-        context: buildContext,
+        context: context,
         builder: (BuildContext context) {
-          return alertDialog;
+          if (flag) {
+            return alertDialogIncrement;
+          }
+          return alertDialogDecrement;
         });
   }
 }
