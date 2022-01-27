@@ -35,6 +35,10 @@ class _MyHomePageState extends State<MyHomePage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
 
+  final namaTextEditingController = TextEditingController();
+  final nimTextEditingController = TextEditingController();
+  final semesterTextEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
+                    controller: namaTextEditingController,
                     decoration: const InputDecoration(
                         hintText: 'Masukkan Nama',
                         hintStyle: TextStyle(fontStyle: FontStyle.normal),
@@ -65,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 10.0,
                   ),
                   TextFormField(
+                    controller: nimTextEditingController,
                     decoration: const InputDecoration(
                       hintText: 'Masukkan NIM',
                       labelText: 'NIM',
@@ -82,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 10.0,
                   ),
                   TextFormField(
+                    controller: semesterTextEditingController,
                     decoration: const InputDecoration(
                       hintText: 'Masukkan Semester',
                       labelText: 'Semester',
@@ -90,9 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     keyboardType: TextInputType.text,
                     validator: (value) {
-                      if (value!.isNotEmpty) {
-                        action(context, value);
-                      } else {
+                      if (value!.isEmpty) {
                         return 'Semester tidak boleh kosong !';
                       }
                     },
@@ -111,9 +116,20 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void action(BuildContext context, String data) {
+  void validateInput() {
+    FormState? form = formKey.currentState;
+    ScaffoldState? scaffold = scaffoldkey.currentState;
+
+    if (form!.validate()) {
+      showData(context);
+    }
+  }
+
+  void showData(BuildContext context) {
     var alertDialog = AlertDialog(
-      content: Text('Data : $data'),
+      content: Text('Nama : ${namaTextEditingController.text} \n' +
+          'NIM : ${nimTextEditingController.text} \n' +
+          'Semester : ${semesterTextEditingController.text}'),
     );
 
     showDialog(
@@ -121,17 +137,5 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context) {
           return alertDialog;
         });
-  }
-
-  void validateInput() {
-    FormState? form = formKey.currentState;
-    ScaffoldState? scaffold = scaffoldkey.currentState;
-
-    SnackBar message =
-        const SnackBar(content: Text('Semua data sudah divalidasi'));
-
-    if (form!.validate()) {
-      scaffold?.showSnackBar(message);
-    }
   }
 }
