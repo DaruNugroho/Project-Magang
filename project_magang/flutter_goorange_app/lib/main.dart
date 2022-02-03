@@ -282,11 +282,42 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Center(
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    child: Card(),
-                  ),
-                ),
+                    child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: 50.0,
+                      decoration: BoxDecoration(
+                        color: Colors.cyan[900],
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10.0),
+                          topRight: Radius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: 40.0,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(10.0),
+                          bottomRight: Radius.circular(10.0),
+                        ),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          'Judul informasi penting buat yang bikin kamu makin kece',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                )),
               ],
             ),
           ],
