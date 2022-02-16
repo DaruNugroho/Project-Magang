@@ -38,7 +38,7 @@ class _SecondRouteState extends State<SecondRoute> {
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
